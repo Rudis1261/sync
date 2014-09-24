@@ -32,8 +32,7 @@ var btn = (function($, window) {
         $("input[type='text']").on("keydown", function(event){
             if (event.keyCode == 9 || event.keyCode == 13) {
                 bluetoothSerial.write(
-                    $(this).val(), 
-                    _message("Send Message")
+                    $(this).val()
                 );
             }
         });
