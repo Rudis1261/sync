@@ -9,6 +9,7 @@
 
     <!-- Custom styles for this template -->
     <link href="assets/css/style.css" rel="stylesheet">
+
   </head>
   <body>
 
@@ -93,12 +94,12 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="assets/js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>    
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript">
 
       $(document).on("deviceready", function(){
-        
+
         // Open the menu     
         $(".navbar-toggle").on("touchstart click", function(event){
           event.preventDefault();
@@ -130,10 +131,6 @@
         });
       });
     </script>
-    <script src="assets/js/bootstrap.min.js"></script>
     <script src="js/bluetooth.js"></script>
-    <script type="text/javascript">
-        app.initialize();
-    </script>
   </body>
 </html>
