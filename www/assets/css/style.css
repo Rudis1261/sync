@@ -1,0 +1,115 @@
+html, body {
+  height: 100%;
+  overflow-x: hidden;  
+}
+ul.unstyled {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  line-height: 50px;
+}
+.navbar-inverse { background: #333; }
+.navbar-inverse,
+.navbar-default {
+  border-top: 3px solid #2171b5;
+}
+.glyphicon-off { color: #2171b5; }
+.label {
+  height: 40px;
+  -webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+}
+/* BOOTSTRAP OVERRIDES */
+
+.layout-main,
+.layout-menu {  
+  padding: 0;
+  margin: 0;
+  padding-top: 54px; 
+  display: block;
+  height: 100%;
+  right: 0px;
+  width: 100%;
+  position: absolute;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.layout-main {
+  display: block;
+  background: icewhite; 
+}
+
+.layout-menu.open { height: 300px; width: 100%; }
+.layout-menu {
+  -webkit-transition: all 200ms ease-in-out;
+  -moz-transition: all 200ms ease-in-out;
+  -ms-transition: all 200ms ease-in-out;
+  -o-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
+  -webkit-box-shadow: 1px 0px 6px 0px rgba(50, 50, 50, 0.5);
+  -moz-box-shadow:    1px 0px 6px 0px rgba(50, 50, 50, 0.5);
+  box-shadow:         1px 0px 6px 0px rgba(50, 50, 50, 0.5);
+  height: 0px;
+  overflow: hidden;
+  text-align: left;
+  background: #f4f4f4; 
+  z-index: 100;
+}
+
+.layout-menu .content,
+.layout-menu .nav {
+  position: absolute;
+  display: block;  
+  height: 100%;
+}
+.layout-menu .nav {
+  text-align: center;
+  border-right: 1px solid #eaeaea;
+  z-index: 100;
+}
+.layout-menu .content {
+  width: 100%;
+  padding-left: 60px;
+}
+.layout-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.layout-menu ul li {  
+  font-size: 20px; 
+  width: 50px;   
+  height: 45px; 
+  overflow: hidden;
+  line-height: 50px;
+  border-top: 1px solid #eaeaea;
+}
+.layout-menu ul li a i {
+  text-align: center;
+  width: 50px;
+  margin-right: 5px;
+}
+.exit { 
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 10000;
+  font-size: 30px;
+}
+
+ul.devices {
+  margin: 20px 0; 
+}
+.devices li {
+  background: red;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  border: 1px solid #CCC;
+  background: #eaeaea;
+  margin: 4px 10px;
+}
+.status-off { display: none; }
+.status-on { display: none; }
