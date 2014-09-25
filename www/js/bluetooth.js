@@ -1,23 +1,28 @@
-var btn = (function($, window) {
-
+var bth = (function($, window, db) {
+   
     function _construct() {       
-        $(document).on("deviceready", _init);          
+        $(document).on("deviceready", _init); 
         $(".status-on,.status-off").hide();   
     }
 
-    function _connect(mac_id) {
+    // Check for existing connections
+    function _existing_connection() {
+        if (db.get("last_connection") !== null) {
+            console.log("Existing Pairing Found");
+        } 
+    }
+
+    // External Connect Function
+    function _connect(mac_id) {        
+        db.set("last_connection", mac_id);
         bluetoothSerial.connectInsecure(
             mac_id, 
-            $(".devices").hide()
+            $("div.devices").hide()
         );
     }
 
-    function _message(message) {
-        alert(message);
-    }
-
-    function _init() {
-
+    // Volume Rocker Event Listener
+    function _volumeRocker() {
         $(window).on("volumebuttonslistener", function(event){
             if (event.originalEvent.signal){
                 if (event.originalEvent.signal == "volume-down"){
@@ -28,7 +33,10 @@ var btn = (function($, window) {
                 }
             }
         });
+    }
 
+    // Go Button event listener
+    function _goButton() {
         $("input[type='text']").on("keydown", function(event){
             if (event.keyCode == 9 || event.keyCode == 13) {
                 bluetoothSerial.write(
@@ -36,8 +44,18 @@ var btn = (function($, window) {
                 );
             }
         });
+    }
 
-        console.log("Ready to start using bluetooth");
+    // Everything has to start somewhere
+    function _init() {
+
+        console.log("Bluetooth INIT");
+
+        // Start other listeners as well
+        _volumeRocker();
+        _goButton();
+        _existing_connection();
+
         bluetoothSerial.isEnabled(
             function() {
                 console.log("Bluetooth is enabled");
@@ -50,7 +68,7 @@ var btn = (function($, window) {
                         bluetoothSerial.list(function(devices) {
                             devices.forEach(function(device) {
                                 console.log(device.id);
-                                $(".devices").append('<li onClick="btn.connect(\'' + device.id + '\');">' + device.name + ' [' + device.id + ']</li>');
+                                $("ul.devices").append('<li onClick="bth.connect(\'' + device.id + '\');">' + device.name + ' [' + device.id + ']</li>');
                             })
                         }); 
                     }
@@ -71,7 +89,8 @@ var btn = (function($, window) {
      */
     _construct();
     return {
+        // Only the connect function is exposed at the moment
         connect: _connect      
     };
 
-})(jQuery, window);
+})(jQuery, window, db);

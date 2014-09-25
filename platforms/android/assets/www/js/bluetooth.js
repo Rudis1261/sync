@@ -1,14 +1,19 @@
-var btn = (function($, window) {
-
+var bth = (function($, window, db) {
+   
     function _construct() {       
-        $(document).on("deviceready", _init);          
+        $(document).on("deviceready", _init);         
+        if (db.get("last_connection") !== null) {
+            console.log("FOUND A HOST!");
+        }        
         $(".status-on,.status-off").hide();   
     }
 
     function _connect(mac_id) {
+        // REMEMBER WHICH CONNECTION THE USER CHOSE LAST
+        db.set("last_connection", mac_id);
         bluetoothSerial.connectInsecure(
             mac_id, 
-            $(".devices").hide()
+            $("div.devices").hide()
         );
     }
 
@@ -50,7 +55,7 @@ var btn = (function($, window) {
                         bluetoothSerial.list(function(devices) {
                             devices.forEach(function(device) {
                                 console.log(device.id);
-                                $(".devices").append('<li onClick="btn.connect(\'' + device.id + '\');">' + device.name + ' [' + device.id + ']</li>');
+                                $("ul.devices").append('<li onClick="bth.connect(\'' + device.id + '\');">' + device.name + ' [' + device.id + ']</li>');
                             })
                         }); 
                     }
@@ -74,4 +79,4 @@ var btn = (function($, window) {
         connect: _connect      
     };
 
-})(jQuery, window);
+})(jQuery, window, db);

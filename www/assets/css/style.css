@@ -111,5 +111,19 @@ ul.devices {
   background: #eaeaea;
   margin: 4px 10px;
 }
+.manual-command {
+  color: white;
+  text-align: center;
+  position: fixed;
+  bottom: 0px;
+  background: #2171b5;
+  padding: 10px;
+  margin: 0;
+  width:100%;
+  -webkit-box-shadow: inset -4px 21px 5px -19px rgba(0,0,0,0.75);
+  -moz-box-shadow: inset -4px 21px 5px -19px rgba(0,0,0,0.75);
+  box-shadow: inset -4px 21px 5px -19px rgba(0,0,0,0.75);
+}
+
 .status-off { display: none; }
 .status-on { display: none; }
