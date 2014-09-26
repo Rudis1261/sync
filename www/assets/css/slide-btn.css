@@ -33,6 +33,12 @@
   border: 1px solid #215a60;
   -webkit-box-shadow: 1px 1px 3px 0px #333;
   box-shadow: 1px 1px 3px 0px #333;
+  background-image:
+    radial-gradient(
+      circle closest-side,
+      white,
+      #e8e8e8
+    );
 }
 
 /* DEFAULT COLORS */
