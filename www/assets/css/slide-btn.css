@@ -17,11 +17,12 @@
   -o-transition: all 50ms ease-out;
   transition: all 50ms ease-out;
   background: #AAA;
+  margin: 10px;
   border: 1px solid #CCC;
 }
 
 .slide-btn .slide {
-  background: white;  
+  background: white;
   box-sizing: border-box;
   display: inline-block;
   width: 24px;
@@ -43,19 +44,19 @@
 
 /* DEFAULT COLORS */
 .slide-btn.off,
-.slide-btn.on { 
+.slide-btn.on {
   background: #AAA;
   border: 1px solid #333;
 }
 /* WHICH BUTTON IS WHICH SIDE */
-.slide-btn.off { 
-  text-align: right; 
-  background: #235b89; 
+.slide-btn.off {
+  text-align: right;
+  background: #235b89;
   -webkit-box-shadow:inset 2px 2px 4px -1px #000;
   box-shadow:inset 2px 2px 4px -1px #000;
 }
-.slide-btn.on { 
-  text-align: left; 
+.slide-btn.on {
+  text-align: left;
   background: #2171b5;
 }
 

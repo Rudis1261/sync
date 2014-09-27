@@ -4,12 +4,12 @@ var db = (function(window) {
     // Setter
     function _set(key, value) {
         return window.localStorage.setItem(key, value);
-    } 
+    }
 
     // Getter
     function _get(key) {
         return window.localStorage.getItem(key);
-    } 
+    }
 
     // Trash info
     function _remove(key) {

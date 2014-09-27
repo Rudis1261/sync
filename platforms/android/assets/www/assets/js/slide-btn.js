@@ -1,11 +1,11 @@
 var slidebtn = (function($, window) {
 
-    function _construct() {       
-        $(document).on("ready", _init);         
+    function _construct() {
+        $(document).on("ready", _init);
     }
 
     function _init() {
-        $(".slide-btn").click(function(event){         
+        $(".slide-btn").on("click touchstart", function(event){
           event.preventDefault();
           $(this).toggleClass("on").toggleClass("off");
         });

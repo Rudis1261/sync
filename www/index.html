@@ -14,83 +14,80 @@
   </head>
   <body>
 
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">
-          <img src="assets/img/bluetooth.png" width="80" />
-        </a>  
-    </div>
-
-    <div class="layout-menu">
-      <div class="nav">
-        <ul class="unstyled">
-          <li>          
-            <i class="glyphicon glyphicon-cog" data-toggle="settings"></i>
-          </li>        
-          <li>          
-            <i class="glyphicon glyphicon-link" data-toggle="connections"></i>
-          </li> 
-          <li>
-            <i class="glyphicon glyphicon-off" onClick="navigator.app.exitApp();"></i>   
+    <!-- TOP NAVIGATION -->
+    <nav class="navbar navbar-default navbar-fixed-top transition" role="navigation">
+      <div class="container">
+        <ul class="pull-right nav navbar-nav">
+          <li class="btn btn-default">
+            <i class="glyphicon glyphicon-off" onClick="navigator.app.exitApp();"></i>
           </li>
         </ul>
+        <a class="navbar-brand pull-left" href="#">
+          sink&nbsp;&nbsp;<img src="assets/img/bluetooth.png" />
+        </a>
       </div>
+    </nav>
 
-      <!-- Create the content divs -->
-      <div class="content">
-        <div data-content="settings">
-          <h3>Settings</h3>
-        </div>        
-        <div data-content="connections">
-          <h3>Connections</h3>
-        </div> 
-      </div>
-    </div>
-    
+    <!-- THE CONTENT TO DISPLAY -->
     <div class="layout-main row">
-      <div align="center">
+      <div class="center">
 
-        <h1>sink</h1> 
+        <div class="message-centre alert alert-danger transition">
+          Connection to server lost, attempting to reconnect now
+        </div>
 
+        <!-- DISPLAY BLUETOOTH OFF MESSAGE -->
         <div class="status-off">
-          <span class="label label-danger">
-            <i class="glyphicon glyphicon-remove"></i>            
-          </span>
-          &nbsp;&nbsp;Bluetooth Off
-          <div>
-            <p>Please turn your Bluetooth on before proceeding</p>
+          <div class="info-icon">
+            <i class="glyphicon glyphicon-exclamation-sign"></i>
           </div>
-        </div>    
+          <h2>Bluetooth Switched Off!</h2>
+          <div>
+            <p>sink needs Bluetooth to do it's magic. Without it, it has nobody to talk to.</p>
+            <p>Please consider enabling Bluetooth, and ensure that you have paired with the server.</p>
+          </div>
+        </div>
 
+        <!-- TO DISPLAY ON BLUETOOTH ON -->
         <div class="status-on">
           <div>
             <span class="label label-primary">
-              <i class="glyphicon glyphicon-ok"></i>            
+              <i class="glyphicon glyphicon-ok"></i>
             </span>
             &nbsp;&nbsp;Bluetooth On
-          </div> 
+          </div>
 
+          <!-- PAIRED DEVICE LISTING -->
           <div class="devices">
             <h4>Paired Devices Available</h4>
-            <ul class="unstyled devices">          
+            <ul class="unstyled devices">
             </ul>
-          </div> 
-        </div>  
+          </div>
 
-        <div class="slide-btn on" data-on="bth.connect" data-off="bth.disconnect">
-          <div class="slide"></div>
-        </div>       
+          <!-- SLIDE BUTTON -->
+          <!-- <div class="slide-btn on" data-on="bth.connect" data-off="bth.disconnect">
+            <div class="slide"></div>
+          </div> -->
+
+          <!-- SWIPE AREA -->
+          <div class="well swipearea">Swipe Area</div>
+          <div class="well touchable pull-left"  data-action="left">
+            <i class="glyphicon glyphicon-backward"></i>
+          </div>
+          <div class="well touchable pull-right" data-action="right">
+            <i class="glyphicon glyphicon-forward"></i>
+          </div>
+          <div class="clearfix"></div>
+
+          <!-- INFO AREA -->
+          <!-- <div class="well infoarea">INFO</div>
+          <div class="form-group manual-command">
+            <label>Manually Send command</label>
+            <input type="text" class="form-control" placeholder="play">
+          </div>
+        </div> -->
+      </div>
     </div>
-
-    <div class="form-group manual-command">
-      <label>Manually Send command</label>
-      <input type="text" class="form-control" placeholder="play">
-    </div>    
-  </div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -98,44 +95,9 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/jquery.touchSwipe.min.js"></script>
-    <script src="js/database.js"></script>
-    <script src="js/slide-btn.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
-    <script type="text/javascript">
-
-      $(document).on("deviceready", function(){
-
-        // Open the menu     
-        $(".navbar-toggle").on("touchstart click", function(event){
-          event.preventDefault();
-          $(".layout-menu").toggleClass("open");
-          $(".layout-menu .content div").hide();
-        });
-
-        // Open the menu, on a link click    
-        $(".layout-menu li i").on("touchstart click", function(event){
-          
-          event.preventDefault();
-          $(".layout-menu .content div").hide();
-          var toggle = $(this).data("toggle"); 
-
-          console.log($(this).data());
-          console.log(toggle);
-
-          // Do the animations ads needed
-          $(".layout-menu").parent('li').removeClass("active");          
-          if (! $(".layout-menu").hasClass("open"))
-          {
-            $(".layout-menu").toggleClass("open");
-          }
-
-          // Toggle setting page to display
-          if (toggle) {
-            $("[data-content='" + toggle + "']").fadeIn();
-          }
-        });
-      });
-    </script>
-    <script src="js/bluetooth.js"></script>
+    <script src="assets/js/database.js"></script>
+    <script src="assets/js/slide-btn.js"></script>
+    <script src="assets/js/bluetooth.js"></script>
   </body>
 </html>
