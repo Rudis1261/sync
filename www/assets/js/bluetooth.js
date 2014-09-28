@@ -1,18 +1,159 @@
 var bth = (function($, window, db) {
 
-    //var _keepAlive;
     var _theLoop;
-    var _connectedTo;
+    var _wasConnected   = false;
+    var _connected      = false;
     var _loopInterval   = 1000;
     var _hide           = false;
     var _enabled        = false;
+    var _listDevices    = false;
+    var _info           = $(".message-centre");
+    var _retry          = 0;
+    var _maxRetry       = 20;
+
+    /**
+     * ON EVENTS (CALLBACK FUNCTIONS)
+     */
+    function _hideAll() {
+        $(".status-on").hide();
+        $(".status-off").hide();
+        $(".no-devices").hide();
+        $(".connected").hide();
+        _info.hide();
+     }
+
+    function _onEnabled() {
+        _hideAll();
+        $(".status-on").show();
+        $('body').removeClass("off");
+        $('body').addClass("on");
+        _enabled = true;
+        _startConnectionSequence();
+    }
+
+    function _error(message) {
+        _info.addClass("error").removeClass("info").text(message).show();
+    }
+
+    function _message(message) {
+        _info.addClass("info").removeClass("remove").text(message).show();
+    }
+
+    function _onDisabled() {
+        _hideAll();
+        $(".status-off").show();
+        $('body').addClass("off");
+        $('body').removeClass("on");
+        _enabled = false;
+    }
+
+    function _onNoDevices() {
+        _hideAll();
+        $(".no-devices").show();
+        _connected = false;
+    }
+
+    function _setLastConnected() {
+        if (db.get("last_device_attempt")) {
+            db.set("last_device_success",
+                db.get("last_device_attempt")
+            );
+        }
+    }
+
+    function _onConnected(device) {
+        console.log("CONNECTED");
+        _hideAll();
+        _setLastConnected();
+        $(".connected").show();
+        _listDevices    = false;
+        _connected      = true;
+        _wasConnected   = true;
+        _retry          = 0;
+    }
+
+    function _onNotConnected(device) {
+        _connected = false;
+        console.log("NOT CONNECTED");
+
+        // I swear we were connected, just now!
+        if (_wasConnected) {
+            _checkReconnect("Connection lost, attempting to reconnect");
+        }
+
+        // Should we list the devices?
+        if ( ! _listDevices)
+        {
+            _checkReconnect("Attempting to connect to previous server");
+            bluetoothSerial.list(_onDeviceList);
+        } else {
+            bluetoothSerial.list(_onDeviceList);
+        }
+    }
+
+    function _connect(device) {
+        console.log("CONNETING");
+        db.set("last_device_attempt", device);
+        bluetoothSerial.connect(device, _onConnected);
+    }
+
+    function _reconnect(device) {
+        if (_retry <= _maxRetry) {
+
+            _retry += 1;
+            _error("Attempting to reconnect (" + _retry + " of " + _maxRetry + ")");
+            _connect(device);
+
+        }  else {
+            _error("Failed to reconnect!");
+        }
+    }
+
+    // Attempt to reconnect to the last item
+    function _checkReconnect(message) {
+        _error(message);
+        if (db.get("last_device_success")) {
+            _reconnect(db.get("last_device_success"));
+        }
+    }
+
+    function _startConnectionSequence() {
+        bluetoothSerial.isConnected(
+            function(){_onConnected();},
+            function(){_onNotConnected();}
+        );
+    }
+
+    function _onDeviceList(devices) {
+
+        // No paired devices
+        if (devices.length === 0) {
+            _onNoDevices();
+
+        } else {
+
+            $('div.devices').show();
+            var deviceList = "";
+            devices.forEach(function(device) {
+                deviceList += '<li onClick="bth.connect(\'' + device.id + '\');">';
+                deviceList += device.name + ' [' + device.id + ']';
+                deviceList += '</li>';
+            });
+            $('ul.devices').html(deviceList);
+            _listDevices = true;
+        }
+    }
 
     function _construct() {
         $(document).on("deviceready", _init);
-        if (_hide) $(".status-on,.status-off").hide();
+        _hideAll();
     }
 
-    function _listen() {
+    /**
+     * ON EVENTS (CALLBACK FUNCTIONS)
+     */
+
+    /*function _listen() {
         console.log("START SUBSCRIPTION SERVICE");
         bluetoothSerial.subscribe('\n', function (data) {
             console.log("GETTING DATA");
@@ -21,67 +162,28 @@ var bth = (function($, window, db) {
             console.log("GETTING DATA FAILED");
             console.log(data);
         });
-    }
-
-    // Check for existing connections
-    function _existing_connection() {
-        if (db.get("last_connection") !== null) {
-            console.log("Existing Pairing Found");
-        }
-    }
-
-    // External Connect Function
-    function _connect(mac_id) {
-        db.set("last_connection", mac_id);
-        bluetoothSerial.connectInsecure(mac_id,
-            _startKeepAlive,
-            _killKeepAlive
-        );
-    }
+    }*/
 
     function _mainLoop(){
-        $("div.devices").hide();
-            _listen();
-        console.log("START KEEP ALIVE");
+        console.log("SINK INIT");
         _theLoop = setInterval(function(){_loop();}, _loopInterval);
     }
 
     function _loop() {
-        _isEnabled();
-        if (_enabled) {
-
-        }
-    }
-
-    function _isEnabled() {
         bluetoothSerial.isEnabled(
-            function() {
-                console.log("Bluetooth is enabled");
-                $(".status-on").show();
-                $(".status-off").hide();
-                $('body').removeClass("off");
-                $('body').addClass("on");
-                _enabled = true;
-            },
-            function() {
-                console.log("Bluetooth is *not* enabled");
-                $(".status-on").hide();
-                $(".status-off").show();
-                $('body').addClass("off");
-                $('body').removeClass("on");
-                _enabled = false;
-            }
+            _onEnabled,
+            _onDisabled
         );
     }
 
-    function _polo() {
+   /* function _polo() {
         console.log("Received Response!");
     }
 
     function _marco() {
         console.log("KeepAlive Sent");
         _action("marco");
-    }
+    }*/
 
     // Volume Rocker Event Listener
     function _volumeRocker() {
@@ -113,8 +215,9 @@ var bth = (function($, window, db) {
         $(".swipearea").swipe({
           swipe:function(event, direction, distance, duration, fingerCount){
             if (actions[direction])  {
-              $(this).text(actionText[direction]);
-              bth.action(actions[direction]);
+
+                $(this).text(actionText[direction]);
+                bth.action(actions[direction]);
             }
           },
           threshold:80
@@ -158,39 +261,8 @@ var bth = (function($, window, db) {
         _goButton();
         _swipeArea();
         _touchArea();
-        //_existing_connection();
-        _isEnabled();
+        _loop();
         _mainLoop();
-
-        //$(".message-centre").show();
-
-        /*
-        bluetoothSerial.isEnabled(
-            function() {
-                console.log("Bluetooth is enabled, GREAT SUCCESS");
-                bluetoothSerial.isConnected(
-                    function() {
-                        console.log("Bluetooth is connected");
-                    },
-                    function() {
-                        console.log("Bluetooth is *not* connected");
-                        bluetoothSerial.list(function(devices) {
-                            devices.forEach(function(device) {
-                                console.log(device.id);
-                                $("ul.devices").append('<li onClick="bth.connect(\'' + device.id + '\');">' + device.name + ' [' + device.id + ']</li>');
-                            });
-                        });
-                    }
-                );
-                $(".status-on").show();
-                $(".status-off").hide();
-            },
-            function() {
-                console.log("Bluetooth is *not* enabled");
-                $(".status-on").hide();
-                $(".status-off").show();
-            }
-        );*/
     }
 
     /**

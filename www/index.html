@@ -36,6 +36,7 @@
           Connection to server lost, attempting to reconnect now
         </div>
 
+
         <!-- DISPLAY BLUETOOTH OFF MESSAGE -->
         <div class="status-off">
           <div class="info-icon">
@@ -48,26 +49,58 @@
           </div>
         </div>
 
-        <!-- TO DISPLAY ON BLUETOOTH ON -->
-        <div class="status-on">
+
+
+        <!-- DISPLAY BLUETOOTH NO DEVICE -->
+        <div class="no-devices">
+          <div class="info-icon">
+            <i class="glyphicon glyphicon-exclamation-sign"></i>
+          </div>
+          <h2>No Paired Bluetooth devices</h2>
           <div>
-            <span class="label label-primary">
-              <i class="glyphicon glyphicon-ok"></i>
-            </span>
-            &nbsp;&nbsp;Bluetooth On
+            <p>sink needs Bluetooth to do it's magic. Without it, it has nobody to talk to.</p>
+            <p>You have not connected "Paired" with any Bluetooth devices. Nothing paired, nothing to connect to sadly. Please open your Bluetooth settings and pair with the computer running the sink server.</p>
+          </div>
+        </div>
+
+
+
+        <!-- TO DISPLAY ON BLUETOOTH ON -->
+        <div class="status-on" align="center">
+
+          <!-- SLIDE BUTTON -->
+          <!-- <div class="slide-btn on" data-on="bth.connect" data-off="bth.disconnect">
+            <div class="slide"></div>
+          </div> -->
+
+          <div class="info-icon on">
+            <i class="glyphicon glyphicon-link"></i>
           </div>
 
+          <p>Select the device we should connect to please</p>
           <!-- PAIRED DEVICE LISTING -->
           <div class="devices">
             <h4>Paired Devices Available</h4>
             <ul class="unstyled devices">
             </ul>
           </div>
+        </div>
+
+
+
+        <!-- TO DISPLAY ON BLUETOOTH ON -->
+        <div class="connected" align="center">
 
           <!-- SLIDE BUTTON -->
           <!-- <div class="slide-btn on" data-on="bth.connect" data-off="bth.disconnect">
             <div class="slide"></div>
           </div> -->
+
+          <div class="info-icon on">
+            <i class="glyphicon glyphicon-ok-sign"></i>
+          </div>
+
+          <br />
 
           <!-- SWIPE AREA -->
           <div class="well swipearea">Swipe Area</div>
@@ -80,13 +113,11 @@
           <div class="clearfix"></div>
 
           <!-- INFO AREA -->
-          <!-- <div class="well infoarea">INFO</div>
           <div class="form-group manual-command">
             <label>Manually Send command</label>
             <input type="text" class="form-control" placeholder="play">
           </div>
-        </div> -->
-      </div>
+        </div>
     </div>
 
     <!-- Bootstrap core JavaScript

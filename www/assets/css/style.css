@@ -122,9 +122,7 @@ border-radius: 10px;
   font-size: 30px;
 }
 
-ul.devices {
-  margin: 20px 0;
-}
+ul.devices { margin: 20px 0; }
 .devices li {
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
@@ -148,13 +146,16 @@ ul.devices {
 }
 
 
-.status-off {
+.status-off,
+.no-devices {
   padding: 10px;
   text-align: center;
   /*display: none;*/
 }
 .status-on,
-.message-centre {
+.message-centre,
+.no-devices,
+.connected {
   display: none;
 }
 
@@ -188,8 +189,8 @@ ul.devices {
 
 .message-centre {
   position: relative;
-  border-color: #ad1616;
-  background: #c91818;
+  border-color: #333;
+  background: #CCC;
   color: white;
   top: -16px;
   margin: 0 10px;
@@ -205,6 +206,15 @@ background-size: 10px 10px;
 -webkit-box-shadow: 0 1px 3px 0 rgba(50, 50, 50, 0.50);
 -moz-box-shadow:    0 1px 3px 0 rgba(50, 50, 50, 0.50);
 box-shadow:         0 1px 3px 0 rgba(50, 50, 50, 0.50);
+}
+
+.message-centre.error {
+  border-color: #ad1616;
+  background: #c91818;
+}
+.message-centre.info {
+  border-color: #2171b5;
+  background: #2171b5;
 }
 
 .infoarea {
@@ -223,6 +233,7 @@ box-shadow:         0 1px 3px 0 rgba(50, 50, 50, 0.50);
   line-height: 80px;
   padding: 20px;
 }
+.info-icon.on { color: #2171b5; }
 
 .transition {
   -webkit-transition: all 500ms ease-in-out;
