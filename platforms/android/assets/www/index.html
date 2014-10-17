@@ -92,23 +92,36 @@
         <div class="connected" align="center">
 
           <!-- SLIDE BUTTON -->
-          <!-- <div class="slide-btn on" data-on="bth.connect" data-off="bth.disconnect">
-            <div class="slide"></div>
-          </div> -->
 
           <div class="info-icon on">
             <i class="glyphicon glyphicon-ok-sign"></i>
           </div>
-
           <br />
 
           <!-- SWIPE AREA -->
+          <div
+            class="slide-btn on"
+            style="width: 200px;"
+            data-on="$('.swipearea').show();$('.mousearea').hide();$('.mouse-btn').hide();"
+            data-off="$('.swipearea').hide();$('.mousearea').show();$('.mouse-btn').show();"
+            >
+            <div class="slide" data-on-label="Swipe Area" data-off-label="Mouse Area"></div>
+          </div>
+          <div class="clearfix"></div>
+
           <div class="well swipearea">Swipe Area</div>
+          <div class="well mousearea" data-type="drag-area" style="display:none;">Mouse Area</div>
+
           <div class="well touchable pull-left"  data-action="left">
             <i class="glyphicon glyphicon-backward"></i>
           </div>
           <div class="well touchable pull-right" data-action="right">
             <i class="glyphicon glyphicon-forward"></i>
+          </div>
+
+          <div class="btn-group mouse-btn">
+            <a href="#" onClick="bth.action('click');" class="btn btn-lg btn-primary">Left Click</a>
+            <a href="#" onClick="bth.action('rclick');" class="btn btn-lg btn-default">Right Click</a>
           </div>
           <div class="clearfix"></div>
 
@@ -129,6 +142,7 @@
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/database.js"></script>
     <script src="assets/js/slide-btn.js"></script>
+    <script src="assets/js/dragon.js"></script>
     <script src="assets/js/bluetooth.js"></script>
   </body>
 </html>

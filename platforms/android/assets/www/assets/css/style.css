@@ -156,11 +156,12 @@ ul.devices { margin: 20px 0; }
 .message-centre,
 .no-devices,
 .connected {
-  display: none;
+  /*display: none;*/
 }
 
 
-.swipearea {
+.swipearea,
+.mousearea {
   height: 200px;
   color: #AAA;
   text-align: center;
@@ -229,9 +230,9 @@ box-shadow:         0 1px 3px 0 rgba(50, 50, 50, 0.50);
 .info-icon {
   color: #333;
   color: maroon;
-  font-size: 100px;
-  line-height: 80px;
-  padding: 20px;
+  font-size: 60px;
+  line-height: 40px;
+  padding: 15px;
 }
 .info-icon.on { color: #2171b5; }
 

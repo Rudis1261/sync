@@ -18,7 +18,7 @@ var bth = (function($, window, db) {
         $(".status-on").hide();
         $(".status-off").hide();
         $(".no-devices").hide();
-        $(".connected").hide();
+        //$(".connected").hide();
         _info.hide();
      }
 
@@ -149,21 +149,6 @@ var bth = (function($, window, db) {
         _hideAll();
     }
 
-    /**
-     * ON EVENTS (CALLBACK FUNCTIONS)
-     */
-
-    /*function _listen() {
-        console.log("START SUBSCRIPTION SERVICE");
-        bluetoothSerial.subscribe('\n', function (data) {
-            console.log("GETTING DATA");
-            console.log(data);
-        }, function (data) {
-            console.log("GETTING DATA FAILED");
-            console.log(data);
-        });
-    }*/
-
     function _mainLoop(){
         console.log("SINK INIT");
         _theLoop = setInterval(function(){_loop();}, _loopInterval);
@@ -175,15 +160,6 @@ var bth = (function($, window, db) {
             _onDisabled
         );
     }
-
-   /* function _polo() {
-        console.log("Received Response!");
-    }
-
-    function _marco() {
-        console.log("KeepAlive Sent");
-        _action("marco");
-    }*/
 
     // Volume Rocker Event Listener
     function _volumeRocker() {
@@ -213,16 +189,16 @@ var bth = (function($, window, db) {
         actionText["down"]  = "Stopped";
 
         $(".swipearea").swipe({
-          swipe:function(event, direction, distance, duration, fingerCount){
-            if (actions[direction])  {
-
-                $(this).text(actionText[direction]);
-                bth.action(actions[direction]);
-            }
-          },
-          threshold:80
+            swipe:function(event, direction, distance, duration, fingerCount){
+                if (actions[direction]) {
+                    $(this).text(actionText[direction]);
+                    bth.action(actions[direction]);
+                }
+            },
+            threshold: $(".swipearea").hasClass('on') ? 80 : 0
         });
     }
+
 
     // The skip left and right buttons also need listeners
     function _touchArea() {

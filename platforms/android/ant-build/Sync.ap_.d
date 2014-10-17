@@ -137,6 +137,7 @@
 /home/rudis1261/Projects/android/sync/platforms/android/assets/www/assets/js/jquery.min.map \
 /home/rudis1261/Projects/android/sync/platforms/android/assets/www/assets/js/slide-btn.js \
 /home/rudis1261/Projects/android/sync/platforms/android/assets/www/assets/js/bluetooth.js \
+/home/rudis1261/Projects/android/sync/platforms/android/assets/www/assets/js/dragon.js \
 /home/rudis1261/Projects/android/sync/platforms/android/assets/www/assets/js/database.js \
 /home/rudis1261/Projects/android/sync/platforms/android/assets/www/assets/js/bootstrap.min.js \
 /home/rudis1261/Projects/android/sync/platforms/android/assets/www/assets/js/jquery.touchSwipe.min.js \

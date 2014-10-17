@@ -11,11 +11,11 @@
   padding: 2px;
   box-sizing: border-box;
   overflow: hidden;
-  -webkit-transition: all 50ms ease-out;
-  -moz-transition: all 50ms ease-out;
-  -ms-transition: all 50ms ease-out;
-  -o-transition: all 50ms ease-out;
-  transition: all 50ms ease-out;
+  -webkit-transition: all 333ms ease-out;
+  -moz-transition: all 333ms ease-out;
+  -ms-transition: all 333ms ease-out;
+  -o-transition: all 333ms ease-out;
+  transition: all 333ms ease-out;
   background: #AAA;
   margin: 10px;
   border: 1px solid #CCC;
@@ -64,21 +64,23 @@
 /* OFF STATE */
 .slide-btn.off .slide { border-color: #707070; }
 .slide-btn.off .slide:before {
-  content: "OFF";
+  content: attr(data-off-label);
   font-size: 13px;
   display: inline-block;
   text-shadow: 1px 1px 2px #000;
   height: 24px;
   position: relative;
   top: -4px;
-  left: -33px;
+  left: -150px;
   color: #AAA;
+  width: 140px;
+  text-align: center;
 }
 
 /* ON STATE */
 .slide-btn.on .slide { border-color: #215a60; }
 .slide-btn.on .slide:before {
-  content: "ON";
+  content: attr(data-on-label);
   font-size: 13px;
   display: inline-block;
   text-shadow: 1px 1px 2px #000; /*#46f2d8*/
@@ -87,4 +89,6 @@
   top: -4px;
   left: 33px;
   color: #FFF;
+  text-align: center;
+  width: 140px;
 }
