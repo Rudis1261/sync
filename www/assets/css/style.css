@@ -150,32 +150,32 @@ ul.devices { margin: 20px 0; }
 .no-devices {
   padding: 10px;
   text-align: center;
-  /*display: none;*/
+  display: none;
 }
 .status-on,
 .message-centre,
 .no-devices,
 .connected {
-  /*display: none;*/
+  display: none;
 }
 
 
 .swipearea,
 .mousearea {
-  height: 200px;
+  height: 300px;
   color: #AAA;
   text-align: center;
-  line-height: 160px;
+  line-height: 260px;
   font-size: 22px;
 }
 .touchable {
   position: relative;
-  height: 200px;
+  height: 300px;
   background: #555;
   right: 0;
   width: 40px;
-  top: -220px;
-  line-height: 160px;
+  top: -320px;
+  line-height: 260px;
   color: #777;
   font-size: 22px;
   margin-bottom: -200px;
@@ -218,6 +218,10 @@ box-shadow:         0 1px 3px 0 rgba(50, 50, 50, 0.50);
   background: #2171b5;
 }
 
+.mouse-btn a {
+  margin: 5px 10px;
+}
+
 .infoarea {
   color: white;
   font-family: monospace;
@@ -233,6 +237,7 @@ box-shadow:         0 1px 3px 0 rgba(50, 50, 50, 0.50);
   font-size: 60px;
   line-height: 40px;
   padding: 15px;
+  margin: 0 0 10px 10px;
 }
 .info-icon.on { color: #2171b5; }
 

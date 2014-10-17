@@ -18,7 +18,7 @@ var bth = (function($, window, db) {
         $(".status-on").hide();
         $(".status-off").hide();
         $(".no-devices").hide();
-        //$(".connected").hide();
+        $(".connected").hide();
         _info.hide();
      }
 

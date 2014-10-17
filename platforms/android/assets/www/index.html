@@ -93,15 +93,14 @@
 
           <!-- SLIDE BUTTON -->
 
-          <div class="info-icon on">
+          <div class="info-icon on pull-left">
             <i class="glyphicon glyphicon-ok-sign"></i>
           </div>
           <br />
 
           <!-- SWIPE AREA -->
-          <div
-            class="slide-btn on"
-            style="width: 200px;"
+          <div class="slide-btn on pull-right top-right"
+            style="width: 120px;"
             data-on="$('.swipearea').show();$('.mousearea').hide();$('.mouse-btn').hide();"
             data-off="$('.swipearea').hide();$('.mousearea').show();$('.mouse-btn').show();"
             >
@@ -110,7 +109,7 @@
           <div class="clearfix"></div>
 
           <div class="well swipearea">Swipe Area</div>
-          <div class="well mousearea" data-type="drag-area" style="display:none;">Mouse Area</div>
+          <div class="well mousearea" data-type="drag-area" style="display:none;">Mouse</div>
 
           <div class="well touchable pull-left"  data-action="left">
             <i class="glyphicon glyphicon-backward"></i>
@@ -119,7 +118,7 @@
             <i class="glyphicon glyphicon-forward"></i>
           </div>
 
-          <div class="btn-group mouse-btn">
+          <div class="mouse-btn" style="display: none;">
             <a href="#" onClick="bth.action('click');" class="btn btn-lg btn-primary">Left Click</a>
             <a href="#" onClick="bth.action('rclick');" class="btn btn-lg btn-default">Right Click</a>
           </div>
@@ -138,6 +137,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script type="text/javascript" src="cordova.js"></script>
     <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/underscore-min.js"></script>
     <script src="assets/js/jquery.touchSwipe.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/database.js"></script>
