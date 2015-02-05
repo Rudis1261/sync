@@ -91,7 +91,7 @@
     // We need to be able to determine how far the dragging action was
     function _distance() {
         var out = { x:0, y:0 };
-        if ( _dragging) {
+        if (_dragging) {
             out.x = _endX - _startX;
             out.y = _endY - _startY;
         }
